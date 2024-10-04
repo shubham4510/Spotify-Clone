@@ -36,7 +36,7 @@ const addAlbum = async (req,res) => {
 }
 const listAlbum = async (req,res) => {
 try {
-    const allAlbums = await albumModel.find();
+    const allAlbums = await albumModel.find({});
 
     return res.json({
         success:true,
@@ -44,6 +44,7 @@ try {
     })
     
 } catch (error) {
+    console.log(error.message)
     return res.json({
         success:false,
         message:error.message,

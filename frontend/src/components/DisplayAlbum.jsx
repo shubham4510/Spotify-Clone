@@ -3,12 +3,12 @@ import Navbar from './Navbar.jsx'
 import { useParams } from 'react-router-dom'
 import { albumsData, assets, songsData } from '../assets/frontend-assets/assets.js';
 import { PlayerContext } from '../context/PlayerContext.jsx';
+import axios from 'axios';
 
 const DisplayAlbum = () => {
     const {id} = useParams();
-
-    const albumData = albumsData[id];
-
+    const {albumsData,url} = useContext(PlayerContext);
+    const albumData = axios.get(`${url}/api/album/id`);
     const {playWithId} = useContext(PlayerContext);
 
   return (
