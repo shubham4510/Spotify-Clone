@@ -3,6 +3,7 @@ import { Routes,Route, useLocation } from 'react-router-dom'
 import DisplayingHome from './DisplayingHome'
 import DisplayAlbum from './DisplayAlbum'
 import { PlayerContext } from '../context/PlayerContext'
+import PageNotFound from './PageNotFound'
 
 const Display = () => {
 
@@ -13,7 +14,6 @@ const Display = () => {
   const albumId = isAlbum ? location.pathname.split('/').pop() : "";
   const album = albumsData.find(album => album._id === albumId);
   const bgColor = album ? album.bgColor : "#121212";
-
   useEffect(() => {
     if(isAlbum){
       displayRef.current.style.background = `linear-gradient(${bgColor},#121212)`
@@ -27,7 +27,8 @@ const Display = () => {
     <div ref={displayRef} className=' w-[100%] m-2 px-6 pt-4 rounded bg-[#121212] text-white overflow-auto lg:w-[75%] lg:left-0'>
         <Routes>
             <Route path='/' element={<DisplayingHome/>}/>
-            <Route path='/album/:id' element={<DisplayAlbum/>}/>
+            <Route path='/album/:id' element={<DisplayAlbum />}/>
+            <Route path='*' element={<PageNotFound/>}/>
         </Routes>
     </div>
   )
